@@ -1,0 +1,178 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+\usepackage{geometry}
+\pagenumbering{gobble}
+% Geometry settings
+\setlength{\headheight}{14.5pt}
+\geometry{
+	a4paper,
+	left=25mm,
+	right=25mm,
+	top=20mm,
+	bottom=20mm,
+}
+% Header and footer settings
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\textbf{NITK Surathkal}}
+\fancyhead[R]{\textbf{Assignment-$1$}}
+\fancyfoot[C]{\thepage}
+
+% Title settings
+\title{
+
+		\begin{minipage}{0.15\textwidth}
+			\includegraphics[width=\textwidth]{NITK_Emblem.png} % Adjust the size as needed
+		\end{minipage}%
+		\begin{minipage}{0.85\textwidth}
+			\centering
+			\textbf{National Institute of Technology Karnataka, Surathkal}
+		\end{minipage}
+}
+\author{
+	\begin{minipage}[t]{0.45\textwidth}
+		\flushleft{\textbf{Dileep Reddy Gosu}}
+	\end{minipage}
+	\begin{minipage}[t]{0.45\textwidth}
+		\flushright
+		\texttt{\textbf{2420585}}
+	\end{minipage}
+}
+\date{
+ \begin{minipage}[t]{0.40\textwidth}
+	\flushleft
+	CSE
+\end{minipage}%
+\begin{minipage}[t]{0.5\textwidth}
+	\flushright
+	\today
+	\end{minipage}}
+
+\begin{document}
+	
+	\maketitle
+	\headrule
+	\vspace{6cm}
+	\begin{center}
+		\textbf{\Large Course:} \large{M.Tech in Computer Science and Engineering} \\
+		\vspace{0.5cm}
+		\textbf{\Large Course Code \& Subject:} \large{CS700 \& Algorithm and Complexity} \\
+		\vspace{0.5cm}
+		\textbf{\Large Professor:} \large{Dr. Vani} \\
+		\vspace{0.5cm}
+		\textbf{\Large Assignment No.:} \large{1} \\
+		\vspace{0.5cm}
+		\textbf{\Large Submission Date:} \large{\today} \\
+	\end{center}
+	\clearpage
+	\tableofcontents
+	\clearpage
+	\pagenumbering{arabic}
+	\setcounter{page}{1}
+	\section*{Introduction}
+	Brief introduction about the assignment.
+	\section*{Question 1}
+	Detailed explanation or answer to question 1.
+	\section{Data Generation and Experimental Setup}
+	\begin{enumerate}
+		\item \textbf{What kind of machine did you use?}\\ 
+		 Acer Nitro5
+		\item \textbf{What timing mechanism did you use?} \\
+		c++ Standard Timing
+		\item \textbf{How many times did you repeat each experiment?}\\
+		25 times
+		\item \textbf{How did you select inputs?} \\
+		Randomly with uniform distribution of positive integers in the range of 1 and 1000000
+		\item \textbf{Did you use the same inputs for all sorting algorithms?} \\
+		yes
+	\end{enumerate}
+	\section{Which of the Three Versions of Quicksort Seems to Perform the Best?}
+	\begin{enumerate}
+		\item \textbf{Graph the best case running time as a function of input size $n$ for all three versions.}
+		\begin{figure}[h]
+			\centering
+			\includegraphics[width=0.75\linewidth]{./pictures/Best_quick.jpg}
+			\caption{Best Case for all the Sorting Algorithms.}
+		\end{figure}
+		\item \textbf{Graph the worst case running time as a function of input size $n$ for all three versions.}
+		\begin{figure}[h]
+			\centering
+			\includegraphics[width=0.75\linewidth]{./pictures/worst_quick.jpg}
+			\caption{Worst Case for all the Sorting Algorithms.}
+		\end{figure}
+		\item \textbf{Graph the average case running time as a function of input size $n$ for all three versions.}
+		\begin{figure}[h]
+			\centering
+			\includegraphics[width=0.75\linewidth]{./pictures/average_quick.jpg}
+			\caption{Average Case for all the Sorting Algorithms.}
+		\end{figure}
+		\begin{figure}[h]
+			\centering
+			\includegraphics[width=0.75\linewidth]{./pictures/quick_average_expand.jpg}
+			\caption{Average Case for all the Sorting Algorithms.Expanded Version}
+		\end{figure}
+	\end{enumerate}
+	\newpage
+	\section{Which of the Six Sorts Seems to Perform the Best (Consider the Best Version of Quicksort)?}
+	\begin{enumerate}
+		\item \textbf{Graph the best case running time as a function of input size $n$ for the six sorts.}
+		\begin{figure}[h]
+			\centering
+			\includegraphics[width=0.75\linewidth]{./pictures/Best.jpg}
+			\caption{Best Case for all the Sorting Algorithms.}
+		\end{figure}
+		\clearpage
+		\begin{figure}[h]
+			\centering
+			\includegraphics[width=0.75\linewidth]{./pictures/Best_enlarged.jpg}
+			\caption{Best Case for all the Sorting Algorithms.Expanded Version}
+		\end{figure}
+		\item \textbf{Graph the worst case running time as a function of input size $n$ for the six sorts.}
+		\begin{figure}[h]
+			\centering
+			\includegraphics[width=0.75\linewidth]{./pictures/Worst.jpg}
+			\caption{Worst Case for all the Sorting Algorithms.}
+		\end{figure}
+		\clearpage
+		\begin{figure}[h]
+			\centering
+			\includegraphics[width=0.75\linewidth]{./pictures/Worst_enlarged.jpg}
+			\caption{Worst Case for all the Sorting Algorithms. Expanded Version}
+		\end{figure}
+		\item \textbf{Graph the average case running time as a function of input size $n$ for the six sorts.}
+		\begin{figure}[h]
+			\centering
+			\includegraphics[width=0.65\linewidth]{./pictures/Average.jpg}
+			\caption{Average Case for all the Sorting Algorithms.}
+		\end{figure}
+		\clearpage
+		\begin{figure}[h]
+			\centering
+			\includegraphics[width=0.65\linewidth]{./pictures/Average_enlarged.jpg}
+			\caption{Average Case for all the Sorting Algorithms.Expanded Version}
+		\end{figure}
+	\end{enumerate}
+	
+	\section{Analyze your data to see if the number of comparisons is correlated with execution time plot (time \ \#comparisons) vs. n and refer to these plots in your answer}
+	\begin{itemize}
+		\item \textbf{Quicksort:} {Showing correlation value nearly 0.99,0.99,0.99 in best and worst case but in average case it is showing 0.99,0.32,0.99 for all 3 types of quicksort variations and for all Algorithms combining it is the fastest algorithm }
+		\item \textbf{Merge and Heap sort:} {Merge sort and heap sort are showing same trend in all the cases}
+		\item \textbf{Insertion Sort \& Bubble sort:} { A stronger correlation with 
+			n but with higher execution times compared to Merge and Heap Sort}
+		\item \textbf{Radix Sort:} {Shown a linear trend bcox all the number are nearly of same digits}
+	\end{itemize}
+	
+	
+	% Add more sections as needed
+	
+	\vspace{1cm}
+	
+	\noindent \textbf{Code: }\textbf{\href{https://github.com/gdillu/DSA-Assignments/tree/main/1st-Assignments/}{Acces to Github repo}}
+	
+\end{document}
