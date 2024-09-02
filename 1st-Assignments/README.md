@@ -5,8 +5,10 @@
 1. **Run the Command**: `python -m venv DSA`
    - Creates a virtual environment named `DSA`.
 
-2. **Activate the Environment**: `./DSA/Scripts/activate`
+2. **Activate the Environment And Install Dependencies**: `./DSA/Scripts/activate`
    - Activates the virtual environment.
+  
+   - `Pip Install matplotlib`
 
 3. **Run the `generate_cases.py` File**:
    - Execute the script to generate test cases.
