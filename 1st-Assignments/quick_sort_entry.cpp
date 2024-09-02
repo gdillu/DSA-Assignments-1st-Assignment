@@ -79,6 +79,10 @@ int main()
     vector<vector<double>> worst_quick(3);
     vector<vector<double>> random_quick(3);
 
+    vector<vector<double>> best_quick_comparisons(3);
+    vector<vector<double>> worst_quick_comparisons(3);
+    vector<vector<double>> random_quick_comparisons(3);
+
     auto start = high_resolution_clock::now(), end = high_resolution_clock::now();
     duration<double> elapsed;
     string line;
@@ -102,6 +106,7 @@ int main()
             quick(test_copy, 0, n - 1,0);
             end = high_resolution_clock::now();
             elapsed = end - start;
+            best_quick_comparisons[count].push_back(elapsed.count()/comparisons);
             best_quick[count].push_back(elapsed.count());
             count++;
 
@@ -110,6 +115,7 @@ int main()
             quick(test_copy, 0, n - 1,1);
             end = high_resolution_clock::now();
             elapsed = end - start;
+            best_quick_comparisons[count].push_back(elapsed.count()/comparisons);
             best_quick[count].push_back(elapsed.count());
             count++;
 
@@ -118,6 +124,7 @@ int main()
             quick(test_copy, 0, n - 1,2);
             end = high_resolution_clock::now();
             elapsed = end - start;
+            best_quick_comparisons[count].push_back(elapsed.count()/comparisons);
             best_quick[count].push_back(elapsed.count());
             count++;
 
@@ -144,6 +151,7 @@ int main()
             quick(test_copy, 0, n - 1,0);
             end = high_resolution_clock::now();
             elapsed = end - start;
+            worst_quick_comparisons[count].push_back(elapsed.count()/comparisons);
             worst_quick[count].push_back(elapsed.count());
             count++;
 
@@ -152,6 +160,7 @@ int main()
             quick(test_copy, 0, n - 1,1);
             end = high_resolution_clock::now();
             elapsed = end - start;
+            worst_quick_comparisons[count].push_back(elapsed.count()/comparisons);
             worst_quick[count].push_back(elapsed.count());
             count++;
 
@@ -160,6 +169,7 @@ int main()
             quick(test_copy, 0, n - 1,2);
             end = high_resolution_clock::now();
             elapsed = end - start;
+            worst_quick_comparisons[count].push_back(elapsed.count()/comparisons);
             worst_quick[count].push_back(elapsed.count());
             count++;
 
@@ -185,6 +195,7 @@ int main()
             quick(test_copy, 0, n - 1,0);
             end = high_resolution_clock::now();
             elapsed = end - start;
+            random_quick_comparisons[count].push_back(elapsed.count()/comparisons);
             random_quick[count].push_back(elapsed.count());
             count++;
 
@@ -193,14 +204,16 @@ int main()
             quick(test_copy, 0, n - 1,1);
             end = high_resolution_clock::now();
             elapsed = end - start;
+            random_quick_comparisons[count].push_back(elapsed.count()/comparisons);
             random_quick[count].push_back(elapsed.count());
             count++;
 
             test_copy = test_cases; // quick_random
-            start = high_resolution_clock::now();
+           start =  high_resolution_clock::now();
             quick(test_copy, 0, n - 1,2);
             end = high_resolution_clock::now();
             elapsed = end - start;
+            random_quick_comparisons[count].push_back(elapsed.count()/comparisons);
             random_quick[count].push_back(elapsed.count());
             count++;
             cout << elapsed.count() << endl;
@@ -210,8 +223,11 @@ int main()
     }
 
     controlOver(best_quick, "Best Case");
-    controlOver(worst_quick, "Average Case");
-    controlOver(random_quick, "Worst Case");
+    controlOver(worst_quick, "Worst Case");
+    controlOver(random_quick, "Average Case");
+    controlOver(best_quick_comparisons,"best Case Comparisons");
+    controlOver(worst_quick_comparisons,"Worst Case Comparisons");
+    controlOver(random_quick_comparisons,"Random Case Comparisons");
 
     return 0;
 }

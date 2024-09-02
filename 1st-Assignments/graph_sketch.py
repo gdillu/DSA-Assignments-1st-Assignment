@@ -8,6 +8,10 @@ def plot_execution(all_values, title):
     
     if len(all_values) == 6:
         labels = ['Bubble Sort', 'Insertion Sort', 'Merge Sort', 'Quick Sort', 'Heap', 'Radix']
+    elif len(all_values) == 4:
+        labels = ['Merge Sort', 'Quick Sort', 'Heap', 'Radix']
+    elif len(all_values) == 2:
+        labels = ['Quick Sort Median', 'Quick Sort Random']
     else:
         labels = ['Quick Sort', 'Quick Sort Median', 'Quick Sort Random']
 
@@ -64,7 +68,10 @@ if __name__ == "__main__":
             raise ValueError("Data should be a list of lists.")
         
         plot_execution(all_times, title)
-        
+        if(len(all_times) == 6):
+            plot_execution(all_times[2:],title)
+        if(len(all_times) == 3):
+            plot_execution(all_times[1:],title)
         correlations = compute_correlations(all_times)
         for i, corr in enumerate(correlations):
             print(f'Correlation between execution time and input size for algorithm {i+1}: {corr}')
