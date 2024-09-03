@@ -6,7 +6,7 @@ def plot_execution(all_values, title):
     plt.figure(figsize=(10, 6))
     sizes = [100, 250, 500, 750, 1000, 2500, 5000, 7500, 10000, 25000, 50000, 75000, 100000]
     
-    if len(all_values) == 6 or len(all_values) == 5:
+    if len(all_values) == 6:
         labels = ['Bubble Sort', 'Insertion Sort', 'Merge Sort', 'Quick Sort', 'Heap', 'Radix']
     elif len(all_values) == 4:
         labels = ['Merge Sort', 'Quick Sort', 'Heap', 'Radix']
@@ -56,12 +56,8 @@ def compute_correlations(all_values):
 def generate_comparison_table(all_values, title):
     sizes = [100, 250, 500, 750, 1000, 2500, 5000, 7500, 10000, 25000, 50000, 75000, 100000]
     
-    if len(all_values) == 6 or len(all_values) == 5:
-        labels = ['Bubble Sort', 'Insertion Sort', 'Merge Sort', 'Quick Sort', 'Heap', 'Radix']
-    elif len(all_values) == 4:
-        labels = ['Merge Sort', 'Quick Sort', 'Heap', 'Radix']
-    elif len(all_values) == 2:
-        labels = ['Quick Sort Median', 'Quick Sort Random']
+    if len(all_values) == 5:
+        labels = ['Bubble Sort', 'Insertion Sort', 'Merge Sort', 'Quick Sort', 'Heap']
     else:
         labels = ['Quick Sort', 'Quick Sort Median', 'Quick Sort Random']
 
