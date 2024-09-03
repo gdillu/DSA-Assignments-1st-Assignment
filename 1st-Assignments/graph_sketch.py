@@ -6,7 +6,7 @@ def plot_execution(all_values, title):
     plt.figure(figsize=(10, 6))
     sizes = [100, 250, 500, 750, 1000, 2500, 5000, 7500, 10000, 25000, 50000, 75000, 100000]
     
-    if len(all_values) == 6:
+    if len(all_values) == 6 or len(all_values) == 5:
         labels = ['Bubble Sort', 'Insertion Sort', 'Merge Sort', 'Quick Sort', 'Heap', 'Radix']
     elif len(all_values) == 4:
         labels = ['Merge Sort', 'Quick Sort', 'Heap', 'Radix']
@@ -18,9 +18,13 @@ def plot_execution(all_values, title):
     for i, execution_times in enumerate(all_values):
         plt.plot(sizes, execution_times, marker='o', linestyle='-', label=labels[i] if i < len(labels) else f'Algorithm {i+1}')
     
+    
     plt.title(f'Execution Time vs. Input Size ({title})')
     plt.xlabel('Input Size')
-    plt.ylabel('Execution Time (ms)')
+    if "Comparisons" in title :
+        plt.ylabel('Execution Time (ms)/#comparisons')
+    else:
+        plt.ylabel('Execution TIme(ms)')
     plt.legend()
     plt.grid(True)
     plt.savefig(f'execution_time_plot_{title}.png')

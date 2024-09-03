@@ -8,11 +8,11 @@
 #include <fstream> // For file operations
 
 using namespace std;
-extern double comparisons = 0;
+
 
 // Bubble Sort
-void bubble(std::vector<int>& vec) {
-    comparisons = 0; // Reset comparison counter
+double bubble(std::vector<int>& vec) {
+    double comparisons = 0; // Reset comparison counter
     int n = vec.size();
     for (int i = 0; i < n-1; ++i) {
         for (int j = 0; j < n-i-1; ++j) {
@@ -22,10 +22,11 @@ void bubble(std::vector<int>& vec) {
             }
         }
     }
+    return comparisons;
 }
 
 // Merge Sort
-void merge(std::vector<int>& vec, int left, int mid, int right) {
+void merge(std::vector<int>& vec, int left, int mid, int right, double& comparisons) {
     int n1 = mid - left + 1;
     int n2 = right - mid;
 
@@ -62,19 +63,21 @@ void merge(std::vector<int>& vec, int left, int mid, int right) {
     }
 }
 
-void merge_sort(std::vector<int>& vec, int left, int right) {
+double merge_sort(std::vector<int>& vec, int left, int right) {
+    double comparisons = 0;
     if (left < right) {
         int mid = left + (right - left) / 2;
 
-        merge_sort(vec, left, mid);
-        merge_sort(vec, mid + 1, right);
+        comparisons += merge_sort(vec, left, mid);
+        comparisons += merge_sort(vec, mid + 1, right);
 
-        merge(vec, left, mid, right);
+        merge(vec, left, mid, right, comparisons);
     }
+    return comparisons;
 }
 
 // Quick Sort
-int partition(std::vector<int> &arr, int low, int high) {
+int partition(std::vector<int> &arr, int low, int high, double& comparisons) {
     int pivot = arr[low];
     int left = low + 1;
     int right = high;
@@ -95,45 +98,46 @@ int partition(std::vector<int> &arr, int low, int high) {
     return right;
 }
 
-int partitionMedian(std::vector<int> &arr, int low, int high) {
+int partitionMedian(std::vector<int> &arr, int low, int high, double& comparisons) {
     int mid = low + (high - low) / 2;
     if (arr[mid] < arr[low]) std::swap(arr[mid], arr[low]);
     if (arr[high] < arr[low]) std::swap(arr[high], arr[low]);
     if (arr[mid] > arr[high]) std::swap(arr[mid], arr[high]);
     std::swap(arr[mid], arr[low]);
-    return partition(arr, low, high);
+    return partition(arr, low, high, comparisons);
 }
 
-int partitionRandom(std::vector<int> &arr, int low, int high) {
+int partitionRandom(std::vector<int> &arr, int low, int high, double& comparisons) {
     int pivotIndex = low + rand() % (high - low + 1);
     std::swap(arr[low], arr[pivotIndex]);
-    return partition(arr, low, high);
+    return partition(arr, low, high, comparisons);
 }
 
-void quick(std::vector<int> &arr, int low, int high, int pivotType) {
-    comparisons = 0; // Reset comparison counter
+double quick(std::vector<int> &arr, int low, int high, int pivotType) {
+    double comparisons = 0; // Reset comparison counter
     while (low < high) {
         int pi;
         if (pivotType == 0) {
-            pi = partition(arr, low, high);
+            pi = partition(arr, low, high, comparisons);
         } else if (pivotType == 1) {
-            pi = partitionMedian(arr, low, high);
+            pi = partitionMedian(arr, low, high, comparisons);
         } else {
-            pi = partitionRandom(arr, low, high);
+            pi = partitionRandom(arr, low, high, comparisons);
         }
 
         if (pi - low < high - pi) {
-            quick(arr, low, pi - 1, pivotType);
+            comparisons += quick(arr, low, pi - 1, pivotType);
             low = pi + 1;
         } else {
-            quick(arr, pi + 1, high, pivotType);
+            comparisons += quick(arr, pi + 1, high, pivotType);
             high = pi - 1;
         }
     }
+    return comparisons;
 }
 
 // Heap Sort
-void heapify(std::vector<int>& vec, int n, int i) {
+void heapify(std::vector<int>& vec, int n, int i, double& comparisons) {
     int largest = i;
     int left = 2 * i + 1;
     int right = 2 * i + 2;
@@ -152,26 +156,27 @@ void heapify(std::vector<int>& vec, int n, int i) {
 
     if (largest != i) {
         std::swap(vec[i], vec[largest]);
-        heapify(vec, n, largest);
+        heapify(vec, n, largest, comparisons);
     }
 }
 
-void heap(std::vector<int>& vec) {
-    comparisons = 0; // Reset comparison counter
+double heap(std::vector<int>& vec) {
+    double comparisons = 0; // Reset comparison counter
     int n = vec.size();
 
     for (int i = n / 2 - 1; i >= 0; i--)
-        heapify(vec, n, i);
+        heapify(vec, n, i, comparisons);
 
     for (int i = n - 1; i >= 0; i--) {
         std::swap(vec[0], vec[i]);
-        heapify(vec, i, 0);
+        heapify(vec, i, 0, comparisons);
     }
+    return comparisons;
 }
 
 // Insertion Sort
-void insertion(std::vector<int>& vec) {
-    comparisons = 0; // Reset comparison counter
+double insertion(std::vector<int>& vec) {
+    double comparisons = 0; // Reset comparison counter
     int n = vec.size();
     for (int i = 1; i < n; ++i) {
         int key = vec[i];
@@ -188,8 +193,10 @@ void insertion(std::vector<int>& vec) {
         }
         vec[j + 1] = key;
     }
+    return comparisons;
 }
 
+// Radix Sort
 int getMax(const vector<int>& arr) {
     return *max_element(arr.begin(), arr.end());
 }
@@ -214,12 +221,12 @@ void countingSort(vector<int>& arr, int exp) {
         arr[i] = output[i];
 }
 
-void radix(vector<int>& arr) {
-    comparisons = 0; // Reset comparison counter
+double radix(vector<int>& arr) {
+    double comparisons = 0; // Reset comparison counter
     int maxNum = getMax(arr);
 
     for (int exp = 1; maxNum / exp > 0; exp *= 10)
         countingSort(arr, exp);
+    return comparisons;
 }
-
 #endif

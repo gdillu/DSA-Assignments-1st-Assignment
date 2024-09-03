@@ -9,7 +9,6 @@
 
 using namespace std;
 using namespace std::chrono;
-
 void controlOver(const vector<vector<double>> &allTimes, string title)
 {
     // Convert vector<vector<double>> to JSON-like string
@@ -87,6 +86,7 @@ int main()
     duration<double> elapsed;
     string line;
     int count;
+    double comparisons;
     while (getline(Bestfile, line))
     {
         if (line.find("Test cases for n=") != string::npos)
@@ -103,7 +103,7 @@ int main()
 
             test_copy = test_cases; // quick_normal
             start = high_resolution_clock::now();
-            quick(test_copy, 0, n - 1,0);
+            comparisons = quick(test_copy, 0, n - 1,0);
             end = high_resolution_clock::now();
             elapsed = end - start;
             best_quick_comparisons[count].push_back(elapsed.count()/comparisons);
@@ -112,7 +112,7 @@ int main()
 
             test_copy = test_cases; // quick_median
             start = high_resolution_clock::now();
-            quick(test_copy, 0, n - 1,1);
+            comparisons = quick(test_copy, 0, n - 1,1);
             end = high_resolution_clock::now();
             elapsed = end - start;
             best_quick_comparisons[count].push_back(elapsed.count()/comparisons);
@@ -121,7 +121,7 @@ int main()
 
             test_copy = test_cases; // quick_random
             start = high_resolution_clock::now();
-            quick(test_copy, 0, n - 1,2);
+            comparisons = quick(test_copy, 0, n - 1,2);
             end = high_resolution_clock::now();
             elapsed = end - start;
             best_quick_comparisons[count].push_back(elapsed.count()/comparisons);
@@ -148,7 +148,7 @@ int main()
 
             test_copy = test_cases; // quick_random
             start = high_resolution_clock::now();
-            quick(test_copy, 0, n - 1,0);
+            comparisons = quick(test_copy, 0, n - 1,0);
             end = high_resolution_clock::now();
             elapsed = end - start;
             worst_quick_comparisons[count].push_back(elapsed.count()/comparisons);
@@ -157,7 +157,7 @@ int main()
 
             test_copy = test_cases; // quick_random
             start = high_resolution_clock::now();
-            quick(test_copy, 0, n - 1,1);
+            comparisons = quick(test_copy, 0, n - 1,1);
             end = high_resolution_clock::now();
             elapsed = end - start;
             worst_quick_comparisons[count].push_back(elapsed.count()/comparisons);
@@ -166,7 +166,7 @@ int main()
 
             test_copy = test_cases; // quick_random
             start = high_resolution_clock::now();
-            quick(test_copy, 0, n - 1,2);
+            comparisons = quick(test_copy, 0, n - 1,2);
             end = high_resolution_clock::now();
             elapsed = end - start;
             worst_quick_comparisons[count].push_back(elapsed.count()/comparisons);
@@ -192,16 +192,17 @@ int main()
             count = 0;
             test_copy = test_cases; // quick_random
             start = high_resolution_clock::now();
-            quick(test_copy, 0, n - 1,0);
+            comparisons = quick(test_copy, 0, n - 1,0);
             end = high_resolution_clock::now();
             elapsed = end - start;
+            cout << comparisons << endl;
             random_quick_comparisons[count].push_back(elapsed.count()/comparisons);
             random_quick[count].push_back(elapsed.count());
             count++;
 
             test_copy = test_cases; // quick_random
             start = high_resolution_clock::now();
-            quick(test_copy, 0, n - 1,1);
+            comparisons = quick(test_copy, 0, n - 1,1);
             end = high_resolution_clock::now();
             elapsed = end - start;
             random_quick_comparisons[count].push_back(elapsed.count()/comparisons);
@@ -210,13 +211,12 @@ int main()
 
             test_copy = test_cases; // quick_random
            start =  high_resolution_clock::now();
-            quick(test_copy, 0, n - 1,2);
+            comparisons = quick(test_copy, 0, n - 1,2);
             end = high_resolution_clock::now();
             elapsed = end - start;
             random_quick_comparisons[count].push_back(elapsed.count()/comparisons);
             random_quick[count].push_back(elapsed.count());
             count++;
-            cout << elapsed.count() << endl;
 
             Randomfile.ignore(); // Ignore the blank line after each section
         }
