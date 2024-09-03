@@ -107,7 +107,7 @@ int main()
             comparisons = bubble(test_copy);
             end = high_resolution_clock::now();
             elapsed = end - start;
-            best_comparisons[count].push_back(elapsed.count()/comparisons);
+            best_comparisons[count].push_back(comparisons);
             best_time[count].push_back(elapsed.count());
             count += 1;
 
@@ -117,7 +117,7 @@ int main()
             comparisons = insertion(test_copy);
             end = high_resolution_clock::now();
             elapsed = end - start;
-            best_comparisons[count].push_back(elapsed.count()/comparisons);
+            best_comparisons[count].push_back(comparisons);
             best_time[count].push_back(elapsed.count());
             count += 1;
 
@@ -127,7 +127,7 @@ int main()
             comparisons = merge_sort(test_copy, 0, n - 1);
             end = high_resolution_clock::now();
             elapsed = end - start;
-            best_comparisons[count].push_back(elapsed.count()/comparisons);
+            best_comparisons[count].push_back(comparisons);
             best_time[count].push_back(elapsed.count());
             count += 1;
 
@@ -137,7 +137,7 @@ int main()
             comparisons = quick(test_copy, 0, n - 1, 1);
             end = high_resolution_clock::now();
             elapsed = end - start;
-            best_comparisons[count].push_back(elapsed.count()/comparisons);
+            best_comparisons[count].push_back(comparisons);
             best_time[count].push_back(elapsed.count());
             count++;
 
@@ -147,7 +147,7 @@ int main()
             comparisons = heap(test_copy);
             end = high_resolution_clock::now();
             elapsed = end - start;
-            best_comparisons[count].push_back(elapsed.count()/comparisons);
+            best_comparisons[count].push_back(comparisons);
             best_time[count].push_back(elapsed.count());
             count += 1;
 
@@ -185,7 +185,7 @@ int main()
             comparisons = bubble(test_copy);
             end = high_resolution_clock::now();
             elapsed = end - start;
-            worst_comparisons[count].push_back(elapsed.count()/comparisons);
+            worst_comparisons[count].push_back(comparisons);
             worst_time[count].push_back(elapsed.count());
             count += 1;
 
@@ -195,7 +195,7 @@ int main()
             comparisons = insertion(test_copy);
             end = high_resolution_clock::now();
             elapsed = end - start;
-            worst_comparisons[count].push_back(elapsed.count()/comparisons);
+            worst_comparisons[count].push_back(comparisons);
             worst_time[count].push_back(elapsed.count());
             count += 1;
 
@@ -205,7 +205,7 @@ int main()
             comparisons = merge_sort(test_copy, 0, n - 1);
             end = high_resolution_clock::now();
             elapsed = end - start;
-            worst_comparisons[count].push_back(elapsed.count()/comparisons);
+            worst_comparisons[count].push_back(comparisons);
             worst_time[count].push_back(elapsed.count());
             count += 1;
 
@@ -215,7 +215,7 @@ int main()
             comparisons = quick(test_copy, 0, n - 1, 1);
             end = high_resolution_clock::now();
             elapsed = end - start;
-            worst_comparisons[count].push_back(elapsed.count()/comparisons);
+            worst_comparisons[count].push_back(comparisons);
             worst_time[count].push_back(elapsed.count());
             count++;
 
@@ -225,7 +225,7 @@ int main()
             comparisons = heap(test_copy);
             end = high_resolution_clock::now();
             elapsed = end - start;
-            worst_comparisons[count].push_back(elapsed.count()/comparisons);
+            worst_comparisons[count].push_back(comparisons);
             worst_time[count].push_back(elapsed.count());
             count += 1;
 
@@ -263,7 +263,7 @@ int main()
             comparisons = bubble(test_copy);
             end = high_resolution_clock::now();
             elapsed = end - start;
-            random_comparisons[count].push_back(elapsed.count()/comparisons);
+            random_comparisons[count].push_back(comparisons);
             random_time[count].push_back(elapsed.count());
             count += 1;
 
@@ -273,7 +273,7 @@ int main()
             comparisons = insertion(test_copy);
             end = high_resolution_clock::now();
             elapsed = end - start;
-            random_comparisons[count].push_back(elapsed.count()/comparisons);
+            random_comparisons[count].push_back(comparisons);
             random_time[count].push_back(elapsed.count());
             count += 1;
 
@@ -283,7 +283,7 @@ int main()
             comparisons = merge_sort(test_copy, 0, n - 1);
             end = high_resolution_clock::now();
             elapsed = end - start;
-            random_comparisons[count].push_back(elapsed.count()/comparisons);
+            random_comparisons[count].push_back(comparisons);
             random_time[count].push_back(elapsed.count());
             count += 1;
 
@@ -293,7 +293,7 @@ int main()
             comparisons = quick(test_copy, 0, n - 1, 1);
             end = high_resolution_clock::now();
             elapsed = end - start;
-            random_comparisons[count].push_back(elapsed.count()/comparisons);
+            random_comparisons[count].push_back(comparisons);
             random_time[count].push_back(elapsed.count());
             count++;
 
@@ -303,7 +303,7 @@ int main()
             comparisons = heap(test_copy);
             end = high_resolution_clock::now();
             elapsed = end - start;
-            random_comparisons[count].push_back(elapsed.count()/comparisons);
+            random_comparisons[count].push_back(comparisons);
             random_time[count].push_back(elapsed.count());
             count += 1;
 
@@ -323,9 +323,9 @@ int main()
     controlOver(best_time, "Best Case");
     controlOver(worst_time,"Worst Case");
     controlOver(random_time,"Average Case");
-    controlOver(best_comparisons,"Best Comparisons");
-    controlOver(worst_comparisons,"Worst Comparisons");
-    controlOver(random_comparisons,"Random Comparisons");
+    controlOver(best_comparisons,"BestComparisons");
+    controlOver(worst_comparisons,"WorstComparisons");
+    controlOver(random_comparisons,"RandomComparisons");
 
     return 0;
 }

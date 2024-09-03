@@ -12,6 +12,7 @@ using namespace std::chrono;
 void controlOver(const vector<vector<double>> &allTimes, string title)
 {
     // Convert vector<vector<double>> to JSON-like string
+    
     ostringstream list;
     list << "[";
     for (size_t i = 0; i < allTimes.size(); ++i)
@@ -36,7 +37,7 @@ void controlOver(const vector<vector<double>> &allTimes, string title)
     string execList = list.str();
 
     // Construct the command to call the Python script
-    string command = "python graph_sketch.py \"" + execList + "\" '" + title + "'";
+    string command = "python graph_sketch.py \"" + execList + "\" " + title + "\"";
 
     cout << "Executing: " << command << endl;
 
@@ -106,7 +107,7 @@ int main()
             comparisons = quick(test_copy, 0, n - 1,0);
             end = high_resolution_clock::now();
             elapsed = end - start;
-            best_quick_comparisons[count].push_back(elapsed.count()/comparisons);
+            best_quick_comparisons[count].push_back(comparisons);
             best_quick[count].push_back(elapsed.count());
             count++;
 
@@ -115,7 +116,7 @@ int main()
             comparisons = quick(test_copy, 0, n - 1,1);
             end = high_resolution_clock::now();
             elapsed = end - start;
-            best_quick_comparisons[count].push_back(elapsed.count()/comparisons);
+            best_quick_comparisons[count].push_back(comparisons);
             best_quick[count].push_back(elapsed.count());
             count++;
 
@@ -124,7 +125,7 @@ int main()
             comparisons = quick(test_copy, 0, n - 1,2);
             end = high_resolution_clock::now();
             elapsed = end - start;
-            best_quick_comparisons[count].push_back(elapsed.count()/comparisons);
+            best_quick_comparisons[count].push_back(comparisons);
             best_quick[count].push_back(elapsed.count());
             count++;
 
@@ -151,7 +152,7 @@ int main()
             comparisons = quick(test_copy, 0, n - 1,0);
             end = high_resolution_clock::now();
             elapsed = end - start;
-            worst_quick_comparisons[count].push_back(elapsed.count()/comparisons);
+            worst_quick_comparisons[count].push_back(comparisons);
             worst_quick[count].push_back(elapsed.count());
             count++;
 
@@ -160,7 +161,7 @@ int main()
             comparisons = quick(test_copy, 0, n - 1,1);
             end = high_resolution_clock::now();
             elapsed = end - start;
-            worst_quick_comparisons[count].push_back(elapsed.count()/comparisons);
+            worst_quick_comparisons[count].push_back(comparisons);
             worst_quick[count].push_back(elapsed.count());
             count++;
 
@@ -169,7 +170,7 @@ int main()
             comparisons = quick(test_copy, 0, n - 1,2);
             end = high_resolution_clock::now();
             elapsed = end - start;
-            worst_quick_comparisons[count].push_back(elapsed.count()/comparisons);
+            worst_quick_comparisons[count].push_back(comparisons);
             worst_quick[count].push_back(elapsed.count());
             count++;
 
@@ -196,7 +197,7 @@ int main()
             end = high_resolution_clock::now();
             elapsed = end - start;
             cout << comparisons << endl;
-            random_quick_comparisons[count].push_back(elapsed.count()/comparisons);
+            random_quick_comparisons[count].push_back(comparisons);
             random_quick[count].push_back(elapsed.count());
             count++;
 
@@ -205,7 +206,7 @@ int main()
             comparisons = quick(test_copy, 0, n - 1,1);
             end = high_resolution_clock::now();
             elapsed = end - start;
-            random_quick_comparisons[count].push_back(elapsed.count()/comparisons);
+            random_quick_comparisons[count].push_back(comparisons);
             random_quick[count].push_back(elapsed.count());
             count++;
 
@@ -214,7 +215,7 @@ int main()
             comparisons = quick(test_copy, 0, n - 1,2);
             end = high_resolution_clock::now();
             elapsed = end - start;
-            random_quick_comparisons[count].push_back(elapsed.count()/comparisons);
+            random_quick_comparisons[count].push_back(comparisons);
             random_quick[count].push_back(elapsed.count());
             count++;
 
@@ -225,9 +226,9 @@ int main()
     controlOver(best_quick, "Best Case");
     controlOver(worst_quick, "Worst Case");
     controlOver(random_quick, "Average Case");
-    controlOver(best_quick_comparisons,"best Case Comparisons");
-    controlOver(worst_quick_comparisons,"Worst Case Comparisons");
-    controlOver(random_quick_comparisons,"Random Case Comparisons");
+    controlOver(best_quick_comparisons,"bestCaseComparisons");
+    controlOver(worst_quick_comparisons,"WorstCaseComparisons");
+    controlOver(random_quick_comparisons,"RandomCaseComparisons");
 
     return 0;
 }

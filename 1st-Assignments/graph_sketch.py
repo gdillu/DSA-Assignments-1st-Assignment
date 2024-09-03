@@ -1,7 +1,7 @@
 import sys
 import ast
 import matplotlib.pyplot as plt
-
+import pandas as pd
 def plot_execution(all_values, title):
     plt.figure(figsize=(10, 6))
     sizes = [100, 250, 500, 750, 1000, 2500, 5000, 7500, 10000, 25000, 50000, 75000, 100000]
@@ -18,13 +18,9 @@ def plot_execution(all_values, title):
     for i, execution_times in enumerate(all_values):
         plt.plot(sizes, execution_times, marker='o', linestyle='-', label=labels[i] if i < len(labels) else f'Algorithm {i+1}')
     
-    
     plt.title(f'Execution Time vs. Input Size ({title})')
     plt.xlabel('Input Size')
-    if "Comparisons" in title :
-        plt.ylabel('Execution Time (ms)/#comparisons')
-    else:
-        plt.ylabel('Execution TIme(ms)')
+    plt.ylabel('Execution Time (ms)')
     plt.legend()
     plt.grid(True)
     plt.savefig(f'execution_time_plot_{title}.png')
@@ -57,6 +53,25 @@ def compute_correlations(all_values):
 
     return correlations
 
+def generate_comparison_table(all_values, title):
+    sizes = [100, 250, 500, 750, 1000, 2500, 5000, 7500, 10000, 25000, 50000, 75000, 100000]
+    
+    if len(all_values) == 6 or len(all_values) == 5:
+        labels = ['Bubble Sort', 'Insertion Sort', 'Merge Sort', 'Quick Sort', 'Heap', 'Radix']
+    elif len(all_values) == 4:
+        labels = ['Merge Sort', 'Quick Sort', 'Heap', 'Radix']
+    elif len(all_values) == 2:
+        labels = ['Quick Sort Median', 'Quick Sort Random']
+    else:
+        labels = ['Quick Sort', 'Quick Sort Median', 'Quick Sort Random']
+
+    df = pd.DataFrame(all_values, index=labels, columns=sizes)
+    df = df.transpose()
+    df.index.name = 'Input Size'
+    table_title = f'{title} Comparisons'
+    print(f'\n{table_title}\n')
+    print(df.to_markdown())
+
 if __name__ == "__main__":
     # Read the command-line argument
     if len(sys.argv) < 3:
@@ -70,15 +85,19 @@ if __name__ == "__main__":
         
         if not isinstance(all_times, list) or not all(isinstance(lst, list) for lst in all_times):
             raise ValueError("Data should be a list of lists.")
-        
-        plot_execution(all_times, title)
-        if(len(all_times) == 6):
-            plot_execution(all_times[2:],title)
-        if(len(all_times) == 3):
-            plot_execution(all_times[1:],title)
-        correlations = compute_correlations(all_times)
-        for i, corr in enumerate(correlations):
-            print(f'Correlation between execution time and input size for algorithm {i+1}: {corr}')
+        print(title)
+        if "Comparisons" in title:
+            generate_comparison_table(all_times, title)
+        else:
+            plot_execution(all_times, title)
+            if len(all_times) == 6:
+                plot_execution(all_times[2:], title)
+            if len(all_times) == 3:
+                plot_execution(all_times[1:], title)
+            
+            correlations = compute_correlations(all_times)
+            for i, corr in enumerate(correlations):
+                print(f'Correlation between execution time and input size for algorithm {i+1}: {corr}')
     
     except Exception as e:
         print(f"Error: {e}")
