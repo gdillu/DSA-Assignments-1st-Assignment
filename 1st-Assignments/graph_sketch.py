@@ -8,6 +8,8 @@ def plot_execution(all_values, title):
     
     if len(all_values) == 6:
         labels = ['Bubble Sort', 'Insertion Sort', 'Merge Sort', 'Quick Sort', 'Heap', 'Radix']
+    elif len(all_values) == 5:
+        labels = ['Insertion Sort', 'Merge Sort', 'Quick Sort', 'Heap', 'Radix']
     elif len(all_values) == 4:
         labels = ['Merge Sort', 'Quick Sort', 'Heap', 'Radix']
     elif len(all_values) == 2:
@@ -89,7 +91,8 @@ if __name__ == "__main__":
             if len(all_times) == 6 :
                 if  title == "BestCase":
                     plot_execution(all_times[2:],title)
-                plot_execution(all_times[1:], title)
+                else:
+                    plot_execution(all_times[1:], title)
             if len(all_times) == 3:
                 plot_execution(all_times[1:], title)
             
