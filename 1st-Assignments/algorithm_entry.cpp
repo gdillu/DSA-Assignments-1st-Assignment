@@ -320,9 +320,9 @@ int main()
         }
     }
 
-    controlOver(best_time, "Best Case");
-    controlOver(worst_time,"Worst Case");
-    controlOver(random_time,"Average Case");
+    controlOver(best_time, "BestCase");
+    controlOver(worst_time,"WorstCase");
+    controlOver(random_time,"AverageCase");
     controlOver(best_comparisons,"BestComparisons");
     controlOver(worst_comparisons,"WorstComparisons");
     controlOver(random_comparisons,"RandomComparisons");

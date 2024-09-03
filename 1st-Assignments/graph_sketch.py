@@ -86,8 +86,10 @@ if __name__ == "__main__":
             generate_comparison_table(all_times, title)
         else:
             plot_execution(all_times, title)
-            if len(all_times) == 6:
-                plot_execution(all_times[2:], title)
+            if len(all_times) == 6 :
+                if  title == "BestCase":
+                    plot_execution(all_times[2:],title)
+                plot_execution(all_times[1:], title)
             if len(all_times) == 3:
                 plot_execution(all_times[1:], title)
             
