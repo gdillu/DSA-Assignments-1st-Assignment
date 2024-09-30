@@ -194,7 +194,7 @@ int main() {
     srand(time(nullptr)); // Seed for random number generation
 
     // Measure execution time for different sizes
-    for (int size : {2, 4, 8, 16, 32, 64, 128, 256}) {
+    for (int size : {256, 512, 1024, 1028, 1130, 1200, 1228, 1300}) {
         measureExecutionTime(size);
     }
 
