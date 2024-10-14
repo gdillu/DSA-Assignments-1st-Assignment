@@ -7,7 +7,7 @@ vector<int> longestIncreasingSubsequence(const std::vector<int>& arr) {
     if (n == 0) return {};
 
     // Initialize the LIS array
-    std::vector<int> LIS(n, 1);
+    vector<int> LIS(n, 1);
     vector<int> prev(n,-1);
     // Compute optimized LIS values in a bottom-up manner
     for (int i = 1; i < n; ++i) {

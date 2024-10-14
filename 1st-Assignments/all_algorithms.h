@@ -21,6 +21,7 @@ double bubble(std::vector<int>& vec) {
                 std::swap(vec[j], vec[j+1]);
             }
         }
+        
     }
     return comparisons;
 }

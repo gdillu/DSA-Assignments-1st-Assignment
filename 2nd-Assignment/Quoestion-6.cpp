@@ -1,78 +1,88 @@
-#include <iostream>
-#include <vector>
-
+#include <bits/stdc++.h>
 using namespace std;
 
-void merge_and_count(vector<int>& arr, vector<int>& temp_arr, int left, int mid, int right, vector<int>& count) {
-    int i = left;    // Starting index for left subarray
-    int j = mid + 1; // Starting index for right subarray
-    int k = left;    // Starting index to be sorted
-    int right_count = 0; // Count of smaller elements
+void merge(vector<pair<int, int> >& v, vector<int>& ans,
+           int l, int mid, int h)
+{
 
-    // Merge the two halves while counting smaller elements
-    while (i <= mid && j <= right) {
-        if (arr[i] > arr[j]) {
-            right_count++; // Found a smaller element in the right half
-            temp_arr[k++] = arr[j++];
-        } else {
-            count[i] += right_count; // Count smaller elements for arr[i]
-            temp_arr[k++] = arr[i++];
+    vector<pair<int, int> > t; // temporary array for merging both halves
+    int i = l;
+    int j = mid + 1;
+
+    while (i < mid + 1 && j <= h) {
+
+        // v[i].first is greater than all
+        // the elements from j till h.
+        if (v[i].first > v[j].first) {
+            ans[v[i].second] += (h - j + 1);
+            t.push_back(v[i]);
+            i++;
+        }
+        else {
+            t.push_back(v[j]);
+            j++;
         }
     }
 
-    // Copy the remaining elements of left subarray, if any
-    while (i <= mid) {
-        count[i] += right_count;
-        temp_arr[k++] = arr[i++];
-    }
+    // if any elements left in left array
+    while (i <= mid)
+        t.push_back(v[i++]);
+    // if any elements left in right array
+    while (j <= h)
+        t.push_back(v[j++]);
+    // putting elements back in main array in
+    // descending order
+    for (int k = 0, i = l; i <= h; i++, k++)
+        v[i] = t[k];
+}
 
-    // Copy the remaining elements of right subarray, if any
-    while (j <= right) {
-        temp_arr[k++] = arr[j++];
-    }
+void mergesort(vector<pair<int, int> >& v, vector<int>& ans,
+               int i, int j)
+{
+    if (i < j) {
+        int mid = (i + j) / 2;
 
-    // Copy the sorted subarray back into the original array
-    for (i = left; i <= right; i++) {
-        arr[i] = temp_arr[i];
+        // calling mergesort for left half
+        mergesort(v, ans, i, mid);
+
+        // calling mergesort for right half
+        mergesort(v, ans, mid + 1, j);
+
+        // merging both halves and generating answer
+        merge(v, ans, i, mid, j);
     }
 }
 
-void merge_sort_and_count(vector<int>& arr, vector<int>& temp_arr, int left, int right, vector<int>& count) {
-    if (left < right) {
-        int mid = (left + right) / 2;
+vector<int> constructLowerArray(int* arr, int n)
+{
 
-        // Sort and count smaller elements in the left half
-        merge_sort_and_count(arr, temp_arr, left, mid, count);
+    vector<pair<int, int> > v;
+    // inserting elements and corresponding index
+    // as pair
+    for (int i = 0; i < n; i++)
+        v.push_back({ arr[i], i });
 
-        // Sort and count smaller elements in the right half
-        merge_sort_and_count(arr, temp_arr, mid + 1, right, count);
+    // answer array for keeping count
+    // initialized by 0,
+    vector<int> ans(n, 0);
 
-        // Merge the two halves
-        merge_and_count(arr, temp_arr, left, mid, right, count);
-    }
+    // calling mergesort
+    mergesort(v, ans, 0, n - 1);
+
+    return ans;
 }
 
-vector<int> count_smaller_elements(vector<int>& arr) {
-    int n = arr.size();
-    vector<int> temp_arr(n);
-    vector<int> count(n, 0);
+// Driver Code Starts.
 
-    // Call the merge_sort_and_count function
-    merge_sort_and_count(arr, temp_arr, 0, n - 1, count);
+int main()
+{
+    int arr[] = { 8,2,6,3,5};
+    int n = sizeof(arr) / sizeof(arr[0]);
 
-    return count;
-}
-
-int main() {
-    vector<int> arr = {8, 2, 6, 3, 5};
-    vector<int> result = count_smaller_elements(arr);
-
-    cout << "Output: [";
-    for (int i = 0; i < result.size(); i++) {
-        cout << result[i];
-        if (i < result.size() - 1) cout << ", ";
+    auto ans = constructLowerArray(arr, n);
+    for (auto x : ans) {
+        cout << x << " ";
     }
-    cout << "]" << endl; // Output: [4, 0, 2, 0, 0]
-
+    cout << "\n";
     return 0;
 }
